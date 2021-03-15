@@ -14,19 +14,7 @@ export const CountryView: React.FC<
     return null
   }
 
-  const {
-    flag,
-    name,
-    nativeName,
-    population,
-    region,
-    subregion,
-    capital,
-    topLevelDomain,
-    currencies,
-    languages,
-    borders
-  } = country
+  const { flag, name } = country
 
   return (
     <div className="container">
