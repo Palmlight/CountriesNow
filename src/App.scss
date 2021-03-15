@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+svg:not(:root) {
+  overflow: visible !important;
+}
+
+// Variables
+$font-type: "Nunito Sans", sans-serif;
+$dark-blue: hsl(209, 23%, 22%);
+$dark-blue-text: hsl(200, 15%, 8%);
+$very-dark-background: hsl(207, 26%, 17%);
+$dark-gray-text: hsl(0, 0%, 52%);
+$gray-background: hsl(0, 0%, 98%);
+$white: hsl(0, 0%, 100%);
+$font-size-1: 14px;
+$font-size-2: 16px;
+$font-weight-1: 300;
+$font-weight-2: 600;
+$font-weight-3: 800;
+
+//  containers
+
+.container {
+  margin: 0 auto;
+  @media (max-width: 640px) {
+    width: 85vw;
+  }
+  @media (max-width: 768px) {
+    width: 85vw;
+  }
+
+  @media (min-width: 1024px) {
+    width: 80vw;
+  }
+
+  @media (min-width: 1280px) {
+    width: 1340px;
+  }
+}
+
+// Loading animation
+
+@keyframes Bounce {
+  0% {
+    margin-bottom: 0;
+  }
+
+  50% {
+    margin-bottom: 15px;
+  }
+
+  100% {
+    margin-bottom: 0;
+  }
+}
+
+// mixin
+
+@mixin centralize {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin dotstemplate($backgorund-color) {
+  background-color: $backgorund-color;
+  border-radius: 50px;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+
+  animation: Bounce 0.5s linear infinite;
+
+  &:first-child {
+    animation-delay: 0s;
+  }
+
+  &:last-child {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+}
+
+@mixin theme-colors($light-theme: true) {
+  @if $light-theme {
+    background-color: $gray-background;
+    color: $dark-blue-text;
+    nav {
+      background-color: white;
+    }
+    p {
+      color: $dark-gray-text;
+    }
+
+    h1 {
+      color: $dark-blue-text;
+    }
+  } @else {
+    background-color: $very-dark-background;
+    color: $white;
+    nav {
+      background-color: $dark-blue;
+    }
+
+    p {
+      color: $white;
+    }
+  }
+}
+
+@mixin country-theme-container($background-color, $title-color, $span-color) {
+  .country-container {
+    width: calc(100% / 4.3);
+    min-width: 320px;
+    height: 400px;
+    background-color: $background-color;
+    margin-bottom: 20px;
+    overflow: hidden;
+
+    .img-container {
+      height: 200px;
+      width: 100%;
+
+      img {
+        object-fit: cover;
+      }
+    }
+
+    .country-details {
+      padding-left: 20px;
+      font-size: $font-size-2;
+      h1 {
+        color: $title-color;
+      }
+
+      .title {
+        color: $span-color;
+        font-weight: $font-weight-3;
+      }
+    }
+  }
+}
+
+body {
+  font-family: $font-type;
+}
+
+nav {
+  padding: 30px 0;
+  box-shadow: 0px 1px 11px 1px rgba(0, 0, 0, 0.34);
+  margin-bottom: 50px;
+  -webkit-box-shadow: 0px 1px 11px 1px rgba(0, 0, 0, 0.34);
+  -moz-box-shadow: 0px 1px 11px 1px rgba(0, 0, 0, 0.34);
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      cursor: pointer;
+      font-weight: $font-weight-2;
+    }
+  }
+}
+
+.countries-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  .img-container {
+    margin-bottom: 10px;
+  }
+}
+.flag {
+  width: 100% !important;
+  height: 100% !important;
+}
+.lightWrapper {
+  @include theme-colors($light-theme: true);
+
+  .loading-wrapper {
+    @include centralize();
+    .dot {
+      @include dotstemplate($very-dark-background);
+    }
+  }
+
+  .countries-container {
+    @include country-theme-container($white, $dark-blue-text, $dark-blue-text);
+  }
+}
+
+.darkWrapper {
+  @include theme-colors($light-theme: false);
+
+  .loading-wrapper {
+    @include centralize();
+    .dot {
+      @include dotstemplate($white);
+    }
+  }
+
+  .countries-container {
+    @include country-theme-container($dark-blue, $white, $white);
+  }
+}
+
+.page-not-found {
+  height: 100vh;
+  width: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+.view-container {
+  display: flex;
+  flex-wrap: wrap;
+  height: calc(100%);
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: auto;
+  width: 100%;
+  height: calc(100vh - 120px);
+
+  .flag-container {
+    width: 50%;
+    height: 60%;
+  }
+
+  .details-container {
+    h1 {
+      text-align: left;
+    }
+  }
+}
